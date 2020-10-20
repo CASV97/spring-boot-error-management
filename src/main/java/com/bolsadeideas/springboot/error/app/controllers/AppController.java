@@ -27,10 +27,10 @@ public class AppController {
 	// Obtener al usuario
 	@GetMapping("/show/{id}")
 	public String show(@PathVariable Integer id, Model model) {
-		User user = userService.getUserById(id);
-		if (user == null) {
-			throw new UserNotFoundException(id.toString());
-		}
+		/*
+		 * if (user == null) { throw new UserNotFoundException(id.toString()); }
+		 */
+		User user = userService.getUserByIdOptional(id).orElseThrow(() -> new UserNotFoundException(id.toString()));
 		model.addAttribute("user", user);
 		model.addAttribute("title", "User Details: " + user.getFirstName());
 		return "show";

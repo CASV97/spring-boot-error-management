@@ -2,6 +2,7 @@ package com.bolsadeideas.springboot.error.app.services;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.stereotype.Service;
 
@@ -47,6 +48,14 @@ public class UserServiceImpl implements UserService {
 			}
 		}
 		return user;
+	}
+
+	@Override
+	public Optional<User> getUserByIdOptional(Integer id) {
+		User user = getUserById(id);
+		// lo que hace de forma estatica es invocar el metodo of lo que hace es
+		// convertir el objeto usuario independiente si es nulo o no
+		return Optional.ofNullable(user);
 	}
 
 }
